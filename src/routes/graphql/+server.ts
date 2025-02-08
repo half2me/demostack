@@ -1,19 +1,23 @@
 import { useGraphQlJit } from '@envelop/graphql-jit'
-import { type RequestHandler } from '@sveltejs/kit'
+import type { RequestEvent, RequestHandler } from '@sveltejs/kit'
 import { createSchema, createYoga } from 'graphql-yoga'
 import schema from '../../schema.graphql?raw'
 
-const yogaApp = createYoga({
+const yogaApp = createYoga<RequestEvent>({
 	batching: true,
 	logging: true,
 	schema: createSchema({
 		typeDefs: [schema],
 		resolvers: {
 			Query: {
-				names: () => ['Alice', 'Bob', 'Charlie'],
+				KVNames: async (_, _args, ctx) => {
+					const res = await ctx.platform!.env!.KV.list({ limit: 10 })
+					return res.keys?.map((key) => key.name)
+				},
 			},
 			Mutation: {
-				addName: (_, { name }) => {
+				KVAddName: async (_, { name }, ctx) => {
+					await ctx.platform!.env!.KV.put(name, name)
 					return name
 				},
 			},
@@ -24,7 +28,7 @@ const yogaApp = createYoga({
 	graphiql: {
 		defaultQuery: /* GraphQL */ `
 			query {
-				names
+				KVNames
 			}
 		`,
 	},
