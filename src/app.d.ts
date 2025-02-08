@@ -1,4 +1,4 @@
-import { KVNamespace, D1Database } from '@cloudflare/workers-types';
+import { D1Database, KVNamespace } from '@cloudflare/workers-types'
 
 declare global {
 	namespace App {
@@ -8,16 +8,16 @@ declare global {
 		// interface PageState {}
 		interface Platform {
 			env?: {
-				KV: KVNamespace;
-				DB: D1Database;
+				KV: KVNamespace
+				DB: D1Database
 				//do: DurableObjectNamespace;
-			};
+			}
 			context: {
-				waitUntil(promise: Promise<any>): void;
-			};
-			caches: CacheStorage & { default: Cache };
+				waitUntil(promise: Promise<any>): void
+			}
+			caches: CacheStorage & { default: Cache }
 		}
 	}
 }
 
-export {};
+export {}
