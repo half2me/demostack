@@ -1,5 +1,4 @@
 import { names } from '$lib/server/db/schema/names'
-import { useGraphQlJit } from '@envelop/graphql-jit'
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit'
 import { drizzle } from 'drizzle-orm/d1'
 import { createSchema, createYoga } from 'graphql-yoga'
@@ -34,7 +33,7 @@ const yogaApp = createYoga<RequestEvent>({
 			},
 		},
 	}),
-	plugins: [useGraphQlJit()],
+	plugins: [],
 	graphqlEndpoint: '/graphql',
 	graphiql: {
 		defaultQuery: /* GraphQL */ `
