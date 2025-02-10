@@ -26,6 +26,11 @@ const yogaApp = createYoga<RequestEvent>({
 					await ctx.platform!.env!.KV.put(name, name)
 					return name
 				},
+				D1AddName: async (_, { name }, ctx) => {
+					const db = drizzle(ctx.platform!.env!.DB)
+					const res = await db.insert(names).values({ name }).returning()
+					return res[0]
+				},
 			},
 		},
 	}),
