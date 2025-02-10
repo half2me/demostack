@@ -1,5 +1,7 @@
+import { names } from '$lib/server/db/schema/names'
 import { useGraphQlJit } from '@envelop/graphql-jit'
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit'
+import { drizzle } from 'drizzle-orm/d1'
 import { createSchema, createYoga } from 'graphql-yoga'
 import schema from '../../schema.graphql?raw'
 
@@ -13,6 +15,10 @@ const yogaApp = createYoga<RequestEvent>({
 				KVNames: async (_, _args, ctx) => {
 					const res = await ctx.platform!.env!.KV.list({ limit: 10 })
 					return res.keys?.map((key) => key.name)
+				},
+				D1Names: async (_, _args, ctx) => {
+					const db = drizzle(ctx.platform!.env!.DB)
+					return await db.select().from(names).all()
 				},
 			},
 			Mutation: {

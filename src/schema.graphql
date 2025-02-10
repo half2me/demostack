@@ -1,7 +1,14 @@
 type Query {
 	KVNames: [String!]!
+	D1Names: [D1Name!]!
 }
 
 type Mutation {
 	KVAddName(name: String!): String!
+	D1AddName(name: String!): D1Name!
+}
+
+type D1Name {
+	id: ID!
+	name: String!
 }
