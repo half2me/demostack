@@ -1,0 +1,15 @@
+name = "demostack"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+compatibility_date = "2025-02-08"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "c519f4d63db54b248cf5912be50e615f"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "demostack"
+database_id = "d1ccc9b2-890a-4cdb-9f77-0bd5b678c91f"
+
+[env]
+production = { }
