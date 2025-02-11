@@ -19,6 +19,11 @@ const yogaApp = createYoga<RequestEvent>({
 					const db = drizzle(ctx.platform!.env!.DB)
 					return await db.select().from(names).all()
 				},
+				DOCounter: async (_, _args, ctx) => {
+					const id = ctx.platform!.env!.DO_COUNTER.idFromName('foo')
+					const stub = ctx.platform!.env!.DO_COUNTER.get(id)
+					return await stub.getCounterValue()
+				},
 			},
 			Mutation: {
 				KVAddName: async (_, { name }, ctx) => {
@@ -29,6 +34,11 @@ const yogaApp = createYoga<RequestEvent>({
 					const db = drizzle(ctx.platform!.env!.DB)
 					const res = await db.insert(names).values({ name }).returning()
 					return res[0]
+				},
+				DOIncrementCounter: async (_, { amount }, ctx) => {
+					const id = ctx.platform!.env!.DO_COUNTER.idFromName('foo')
+					const stub = ctx.platform!.env!.DO_COUNTER.get(id)
+					return await stub.increment(amount || 1)
 				},
 			},
 		},

@@ -1,4 +1,4 @@
-import { D1Database, KVNamespace } from '@cloudflare/workers-types'
+import { D1Database, DurableObjectNamespace, KVNamespace } from '@cloudflare/workers-types'
 
 declare global {
 	namespace App {
@@ -10,6 +10,7 @@ declare global {
 			env?: {
 				KV: KVNamespace
 				DB: D1Database
+				DO_COUNTER: DurableObjectNamespace<import('../demostackfunctions/src/index').MyCounter>
 			}
 			context: {
 				waitUntil(promise: Promise<any>): void

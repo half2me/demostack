@@ -1,11 +1,13 @@
 type Query {
 	KVNames: [String!]!
 	D1Names: [D1Name!]!
+	DOCounter: Int!
 }
 
 type Mutation {
 	KVAddName(name: String!): String!
 	D1AddName(name: String!): D1Name!
+	DOIncrementCounter(amount: Int): Int!
 }
 
 type D1Name {
