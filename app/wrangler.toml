@@ -16,3 +16,7 @@ database_id = "d1ccc9b2-890a-4cdb-9f77-0bd5b678c91f"
 class_name = "MyCounter"
 name = "DO_COUNTER"
 script_name = "demostack_function"
+
+[[queues.producers]]
+queue = "demostack"
+binding = "QUEUE"

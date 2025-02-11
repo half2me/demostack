@@ -1,4 +1,4 @@
-import { D1Database, KVNamespace } from '@cloudflare/workers-types'
+import { D1Database, KVNamespace, type Queue } from '@cloudflare/workers-types'
 import { Env as WorkersEnv } from '../../functions/worker-configuration'
 
 declare global {
@@ -11,6 +11,7 @@ declare global {
 			env?: {
 				KV: KVNamespace
 				DB: D1Database
+				QUEUE: Queue
 			} & WorkersEnv
 			context: {
 				waitUntil(promise: Promise<any>): void
