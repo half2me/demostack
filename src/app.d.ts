@@ -10,7 +10,6 @@ declare global {
 			env?: {
 				KV: KVNamespace
 				DB: D1Database
-				//do: DurableObjectNamespace;
 			}
 			context: {
 				waitUntil(promise: Promise<any>): void

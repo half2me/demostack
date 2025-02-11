@@ -26,7 +26,6 @@
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^3.2.4",
-		"@cloudflare/workers-types": "^4.20250204.0",
 		"@envelop/graphql-jit": "^8.0.4",
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
