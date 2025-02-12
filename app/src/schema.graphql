@@ -8,6 +8,8 @@ type Mutation {
 	KVAddName(name: String!): String!
 	D1AddName(name: String!): D1Name!
 	DOIncrementCounter(amount: Int): Int!
+	AnalyticsWriteDataPoint(value: Float!): Boolean!
+	QueueAddTask(task: String!): Boolean!
 }
 
 type D1Name {

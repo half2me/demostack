@@ -1,5 +1,11 @@
-import { D1Database, KVNamespace, type Queue } from '@cloudflare/workers-types'
-import { Env as WorkersEnv } from '../../functions/worker-configuration'
+import type {
+	AnalyticsEngineDataset,
+	D1Database,
+	IncomingRequestCfProperties,
+	KVNamespace,
+	Queue,
+} from '@cloudflare/workers-types'
+import type { Env as WorkersEnv } from '../../functions/worker-configuration'
 
 declare global {
 	namespace App {
@@ -12,11 +18,13 @@ declare global {
 				KV: KVNamespace
 				DB: D1Database
 				QUEUE: Queue
+				ANALYTICS: AnalyticsEngineDataset
 			} & WorkersEnv
 			context: {
 				waitUntil(promise: Promise<any>): void
 			}
 			caches: CacheStorage & { default: Cache }
+			cf?: IncomingRequestCfProperties
 		}
 	}
 }

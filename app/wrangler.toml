@@ -20,3 +20,7 @@ script_name = "demostack_function"
 [[queues.producers]]
 queue = "demostack"
 binding = "QUEUE"
+
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "demostack_analytics"

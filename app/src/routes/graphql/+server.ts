@@ -40,6 +40,20 @@ const yogaApp = createYoga<RequestEvent>({
 					const stub = ctx.platform!.env!.DO_COUNTER.get(id)
 					return await stub.increment(amount || 1)
 				},
+				QueueAddTask: async (_, { task }, ctx) => {
+					await ctx.platform!.env!.QUEUE?.send(task, { contentType: 'text' })
+					return !!ctx.platform!.env!.QUEUE
+				},
+				AnalyticsWriteDataPoint: (_, { value }, ctx) => {
+					const { region, country, city } = ctx.platform!.cf!
+					const blobs = [region, country, city].filter((i) => i) as [string]
+					ctx.platform!.env!.ANALYTICS?.writeDataPoint({
+						blobs: [...blobs, 'foobar'],
+						doubles: [value],
+						indexes: ['foo'],
+					})
+					return !!ctx.platform!.env!.ANALYTICS
+				},
 			},
 		},
 	}),
