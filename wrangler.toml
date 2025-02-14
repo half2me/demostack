@@ -1,7 +1,17 @@
 name = "demostack"
-pages_build_output_dir = ".svelte-kit/cloudflare"
+#account_id = "29dce13a2d4df58b57141e87fcbbc8c1"
+
+build.command = "pnpm run build"
+main = "./.cloudflare/worker.js"
+site.bucket = "./.cloudflare/public"
 compatibility_date = "2025-02-08"
+workers_dev = false
+preview_urls = false
 upload_source_maps = true
+
+routes = [
+  { pattern = "demostack.lfto.me/graphql", custom_domain = true },
+]
 
 [[kv_namespaces]]
 binding = "KV"
@@ -12,11 +22,6 @@ binding = "DB"
 database_name = "demostack"
 database_id = "d1ccc9b2-890a-4cdb-9f77-0bd5b678c91f"
 
-[[durable_objects.bindings]]
-class_name = "MyCounter"
-name = "DO_COUNTER"
-script_name = "demostack_function"
-
 [[queues.producers]]
 queue = "demostack"
 binding = "QUEUE"
@@ -24,3 +29,7 @@ binding = "QUEUE"
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
 dataset = "demostack_analytics"
+
+[observability]
+enabled = true
+head_sampling_rate = 1
